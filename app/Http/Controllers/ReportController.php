@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -45,5 +46,12 @@ class ReportController extends Controller
     {
         $uploadedFiles = Report::all();
         return view('index', compact('uploadedFiles'));
+    }
+
+    // shows an detail page of an upload
+    public function detail(int $id)
+    {
+        $report = DB::table('Report')->find($id);
+        return view('uploads.view', ['report' => $report]);
     }
 }

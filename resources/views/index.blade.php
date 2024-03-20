@@ -32,8 +32,8 @@
                 {{ $uploadedFile->created_at }}
             </td>
             <td>
-                <a href="{{ \Illuminate\Support\Facades\Storage::url($uploadedFile->file_path) }}" download>
-                    download
+                <a href="{{ route('uploads.view',['id' => $uploadedFile->id]) }}">
+                   view 
                 </a>
             </td>
         </tr>
