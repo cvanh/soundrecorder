@@ -12,13 +12,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/', [ReportController::class, 'index'])->name('index');
+    Route::get('report/create', [ReportController::class, 'create'])->name('report.create');
+    Route::get('report/detail/{id}', [ReportController::class, 'detail'])->name('report.view');
+    Route::get('report/export', [ReportController::class, 'export']);
+    Route::post('report/store', [ReportController::class, 'store'])->name('report.store');
 });
-
-
-Route::get('/', [ReportController::class, 'index'])->name('index');
-Route::get('report/create', [ReportController::class, 'create'])->name('report.create');
-Route::get('report/detail/{id}', [ReportController::class, 'detail'])->name('report.view');
-Route::get('report/export', [ReportController::class, 'export']);
-Route::post('report/store', [ReportController::class, 'store'])->name('report.store');
 
 require __DIR__ . '/auth.php';
