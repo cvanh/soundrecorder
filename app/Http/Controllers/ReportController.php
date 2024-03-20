@@ -41,10 +41,10 @@ class ReportController extends Controller
     // shows the create form
     public function create()
     {
-        return view('uploads.create');
+        return view('report.create');
     }
 
-    // shows the uploads index
+    // shows the report index
     public function index()
     {
         $uploadedFiles = Report::all();
@@ -65,7 +65,7 @@ class ReportController extends Controller
         $relatedReports = Report::whereDate('created_at', $reportDate)
             ->where('id', '!=', $id)
             ->get();
-        return view('uploads.view', ['report' => $report, 'related' => $relatedReports]);
+        return view('report.view', ['report' => $report, 'related' => $relatedReports]);
     }
 
     // requests export

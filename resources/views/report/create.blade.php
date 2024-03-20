@@ -10,7 +10,7 @@
 </div>
 @endif
 
-<form id="uploadForm" action="{{ route('uploads.store') }}" method="POST" enctype="multipart/form-data">
+<form id="uploadForm" action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <label for="file_upload">file</label>
     <input type="file" name="file_upload">

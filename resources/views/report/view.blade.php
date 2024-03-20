@@ -7,7 +7,7 @@
 <div>
     <h2>other reports on this date:</h2>
     @foreach ($related as $relatedReport)
-        <a href="{{ route('uploads.view', ['id' => $relatedReport->id]) }}">
+        <a href="{{ route('report.view', ['id' => $relatedReport->id]) }}">
             <div style="height: 100px; overflow:hidden; border: 1px solid black;">
                 <div>
                     #{{ $relatedReport->id }}

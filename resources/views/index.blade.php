@@ -10,7 +10,7 @@
         <th>updated</th>
         <th>Filename</th>
         <th>Uploaded at</th>
-        <th>Download</th>
+        <th>detail page link</th>
     </tr>
     @forelse($uploadedFiles as $uploadedFile)
         <tr>
@@ -33,8 +33,8 @@
                 {{ $uploadedFile->created_at }}
             </td>
             <td>
-                <a href="{{ route('uploads.view',['id' => $uploadedFile->id]) }}">
-                   view 
+                <a href="{{ route('report.view',['id' => $uploadedFile->id]) }}">
+                   details 
                 </a>
             </td>
         </tr>
