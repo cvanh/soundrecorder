@@ -1,3 +1,4 @@
+<x-header/>
 <h1 class="title">Upload file</h1>
 @if ($errors->any())
 <div class="notification is-danger is-light">

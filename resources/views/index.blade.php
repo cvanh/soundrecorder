@@ -1,3 +1,4 @@
+<x-header/>
 <h1>Uploaded files</h1>
 
 <table>
@@ -36,13 +37,9 @@
                 </a>
             </td>
         </tr>
-        {{-- {{dump($uploadedFile)}} --}}
     @empty
         <tr>
             <td>No uploads found</td>
         </tr>
     @endforelse
 </table>
-<a href="{{ route('uploads.create') }}">
-    Upload a file
-</a>
