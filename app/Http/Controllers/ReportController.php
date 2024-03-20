@@ -71,7 +71,7 @@ class ReportController extends Controller
     // requests export
     public function export()
     {
-        // $user = User::find(1);
         dispatch(new ExportReport());
+        return redirect()->route('index')->with('success', "export started");
     }
 }
