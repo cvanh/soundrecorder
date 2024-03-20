@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use DateTime;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +52,17 @@ class ReportController extends Controller
     // shows an detail page of an upload
     public function detail(int $id)
     {
-        $report = DB::table('Report')->find($id);
-        return view('uploads.view', ['report' => $report]);
+        // fetch the report the user wants to view
+        $report = DB::table('Report')->where('id', $id)->first();
+
+        // fetch reports on the same day but exclude the current record that is viewed
+        // but first we need the date of when the record was made
+        $reportDate = DateTime::createFromFormat("Y-m-d H:i:s", $report->created_at)->format("Y-m-d");
+
+        // now we know the date whe can fetch other records that where made on this date
+        $relatedReports = Report::whereDate('created_at', $reportDate)
+            ->where('id', '!=', $id)
+            ->get();
+        return view('uploads.view', ['report' => $report, 'related' => $relatedReports]);
     }
 }
