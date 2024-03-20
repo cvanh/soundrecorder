@@ -2,9 +2,11 @@
 
 namespace App\Mail;
 
+use App\Models\Report;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -12,7 +14,6 @@ use Illuminate\Queue\SerializesModels;
 class ExportReportEmail extends Mailable
 {
     use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      */
@@ -48,6 +49,21 @@ class ExportReportEmail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [Attachment::fromData(fn () => $this->getReportcsv(), 'report.pfd')->withMime("application/pdf")];
+    }
+
+    private function getReportcsv()
+    {
+        $data = Report::all();
+
+        $handle = fopen('export.csv', 'w');
+
+        foreach ($data as $row) {
+            fputcsv($handle, $row->toArray(), ';');
+        }
+
+        fclose($handle);
+        dd($handle);
+        // TODO work
     }
 }
