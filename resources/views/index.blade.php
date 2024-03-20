@@ -12,47 +12,51 @@
                 <div class="p-6 text-gray-900">
                     <a href="{{ url('uploads/export') }}">export</a>
 
-                    <table>
-                        <tr>
-                            <th>type</th>
-                            <th>description</th>
-                            <th>created</th>
-                            <th>updated</th>
-                            <th>Filename</th>
-                            <th>Uploaded at</th>
-                            <th>detail page link</th>
-                        </tr>
-                        @forelse($uploadedFiles as $uploadedFile)
+                    <table class="table-auto">
+                        <thead>
                             <tr>
-                                <td>
-                                    {{ $uploadedFile->type }}
-                                </td>
-                                <td>
-                                    {{ $uploadedFile->description }}
-                                </td>
-                                <td>
-                                    {{ $uploadedFile->created_at }}
-                                </td>
-                                <td>
-                                    {{ $uploadedFile->upadted_at }}
-                                </td>
-                                <td>
-                                    {{ $uploadedFile->original_name }}
-                                </td>
-                                <td>
-                                    {{ $uploadedFile->created_at }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('report.view', ['id' => $uploadedFile->id]) }}">
-                                        details
-                                    </a>
-                                </td>
+                                <th>type</th>
+                                <th>description</th>
+                                <th>created</th>
+                                <th>updated</th>
+                                <th>Filename</th>
+                                <th>Uploaded at</th>
+                                <th>detail page link</th>
                             </tr>
-                        @empty
-                            <tr>
-                                <td>No records found</td>
-                            </tr>
-                        @endforelse
+                        </thead>
+                        <tbody>
+                            @forelse($uploadedFiles as $uploadedFile)
+                                <tr>
+                                    <td>
+                                        {{ $uploadedFile->type }}
+                                    </td>
+                                    <td>
+                                        {{ $uploadedFile->description }}
+                                    </td>
+                                    <td>
+                                        {{ $uploadedFile->created_at }}
+                                    </td>
+                                    <td>
+                                        {{ $uploadedFile->upadted_at }}
+                                    </td>
+                                    <td>
+                                        {{ $uploadedFile->original_name }}
+                                    </td>
+                                    <td>
+                                        {{ $uploadedFile->created_at }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('report.view', ['id' => $uploadedFile->id]) }}">
+                                            details
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td>No records found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
                     </table>
                 </div>
             </div>
