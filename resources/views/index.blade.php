@@ -1,5 +1,6 @@
 <x-header/>
 <h1>Uploaded files</h1>
+<a href="{{url('uploads/export')}}"">export</a>
 
 <table>
     <tr>

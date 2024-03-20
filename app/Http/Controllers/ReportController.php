@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ExportReport;
 use App\Models\Report;
+use App\Models\User;
 use DateTime;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -64,5 +66,12 @@ class ReportController extends Controller
             ->where('id', '!=', $id)
             ->get();
         return view('uploads.view', ['report' => $report, 'related' => $relatedReports]);
+    }
+
+    // requests export
+    public function export()
+    {
+        // $user = User::find(1);
+        dispatch(new ExportReport());
     }
 }
