@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ExportReportEmail extends Mailable
 {
@@ -38,7 +39,7 @@ class ExportReportEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.emails.export',
+            view: 'views.emails.export',
         );
     }
 
@@ -54,16 +55,17 @@ class ExportReportEmail extends Mailable
 
     private function getReportcsv()
     {
-        $data = Report::all();
 
-        $handle = fopen('export.csv', 'w');
+        $handle = fopen(storage_path('app/public/a.csv'), 'w');
+        Log::debug("asd");
 
-        foreach ($data as $row) {
+        Report::chunk(100, function ($reports) use ($handle) {
+            foreach ($reports as $row) {
             fputcsv($handle, $row->toArray(), ';');
         }
-
+        });
         fclose($handle);
-        dd($handle);
-        // TODO work
+        return $handle;
+        // TODO finish
     }
 }
