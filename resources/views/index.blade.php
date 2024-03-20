@@ -2,12 +2,28 @@
 
 <table>
     <tr>
+        <th>type</th>
+        <th>description</th>
+        <th>created</th>
+        <th>updated</th>
         <th>Filename</th>
         <th>Uploaded at</th>
         <th>Download</th>
     </tr>
     @forelse($uploadedFiles as $uploadedFile)
         <tr>
+            <td>
+                {{$uploadedFile->type}}
+            </td>
+            <td>
+                {{$uploadedFile->description}}
+            </td>
+            <td>
+                {{$uploadedFile->created_at}}
+            </td>
+            <td>
+                {{$uploadedFile->upadted_at}}
+            </td>
             <td>
                 {{ $uploadedFile->original_name }}
             </td>
@@ -20,6 +36,7 @@
                 </a>
             </td>
         </tr>
+        {{-- {{dump($uploadedFile)}} --}}
     @empty
         <tr>
             <td>No uploads found</td>
