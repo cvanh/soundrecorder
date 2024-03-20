@@ -15,7 +15,7 @@
                 {{ $uploadedFile->created_at }}
             </td>
             <td>
-                <a href="{{ \Illuminate\Support\Facades\Storage::url($uploadedFile) }}" download>
+                <a href="{{ \Illuminate\Support\Facades\Storage::url($uploadedFile->file_path) }}" download>
                     download
                 </a>
             </td>
