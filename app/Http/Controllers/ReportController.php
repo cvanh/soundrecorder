@@ -26,6 +26,7 @@ class ReportController extends Controller
         $uploadedFile->filename = $fileName;
         $uploadedFile->original_name = $file->getClientOriginalName();
         $uploadedFile->file_path = $filePath;
+        $uploadedFile->type = "sound";
         $uploadedFile->save();
 
         // Redirect back to the index page with a success message

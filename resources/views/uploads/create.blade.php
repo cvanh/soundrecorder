@@ -9,8 +9,25 @@
 </div>
 @endif
 
-<form action="{{ route('uploads.store') }}" method="POST" enctype="multipart/form-data">
+<form id="uploadForm" action="{{ route('uploads.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    <label for="file_upload">file</label>
     <input type="file" name="file_upload">
-    <button type="submit">Upload</button>
+
+<br>
+
+    <label for="type">type</label>
+    <select name="type" form="uploadForm">
+        <option value="vibration">vibration</option>
+        <option value="sound">sound</option>
+        <option value="manual">manual</option>
+    </select>
+
+    <br>
+
+    <textarea name="description" placeholder="whats wrong?"></textarea>
+
+    <br>
+
+    <button type="submit">submit</button>
 </form>
