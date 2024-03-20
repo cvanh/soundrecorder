@@ -29,7 +29,7 @@ class ReportController extends Controller
         $uploadedFile->save();
 
         // Redirect back to the index page with a success message
-        return redirect()->route('uploads.index')
+        return redirect()->route('index')
             ->with('success', "File `{$uploadedFile->original_name}` uploaded successfully.");
     }
 
@@ -43,6 +43,6 @@ class ReportController extends Controller
     public function index()
     {
         $uploadedFiles = Report::all();
-        return view('uploads.index', compact('uploadedFiles'));
+        return view('index', compact('uploadedFiles'));
     }
 }
