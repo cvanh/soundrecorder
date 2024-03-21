@@ -4,6 +4,8 @@
     <li>{{ $key }}: {{ $node }}</li>
 @endforeach
 
+<x-mediaviewer :report="$report"/>
+
 <div>
     <h2>other reports on this date:</h2>
     @foreach ($related as $relatedReport)
