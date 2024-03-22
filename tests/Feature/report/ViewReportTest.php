@@ -13,6 +13,22 @@ use Tests\TestCase;
 class ViewReportTest extends TestCase
 {
     use RefreshDatabase;
+    private User $user;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create([
+            'email_verified_at' => null,
+        ]);
+
+        // User::fake();
+    }
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+    }
 
     // public function test_email_verification_screen_can_be_rendered(): void
     // {
@@ -27,29 +43,15 @@ class ViewReportTest extends TestCase
 
     public function test_page_can_be_viewed(): void
     {
-        $user = Report::factory()->create([
-            'id' => 0,
-            'type' => "sound",
-            'description' => "super description",
-            "filename" => "_U4A1486 FINAL WEB.jpg",
-            "original_name" => "_U4A1486 FINAL WEB.jpg",
-            'file_path' => "reportFile/PJ5iDjDYPo0mqoBYia74ju39DSLWeXWsCVP6JxNq.jpg",
-            'created_at' => "2024-03-20 21:01:01",
-            "updated_at" => "2024-03-20 21:01:01"
-        ]);
 
-        Event::fake();
+        $report = 
 
-        $verificationUrl = URL::temporarySignedRoute(
-            'verification.verify',
-            now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1($user->email)]
-        );
+        Report::fake();
 
-        $response = $this->actingAs($user)->get($verificationUrl);
+        $response = $this->actingAs($this->user)->withSession(["banned" => false])->get(route('report.view', ["id" => 0]));
+        dd($response->dump());
 
-        Event::assertDispatched(Verified::class);
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(route('index', absolute: false) . '?verified=1');
+        $response->assertStatus(200);
+        // $response->assert(route('index', absolute: false));
     }
 }
