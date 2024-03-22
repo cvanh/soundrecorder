@@ -50,6 +50,6 @@ class ViewReportTest extends TestCase
 
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(route('dashboard', absolute: false) . '?verified=1');
+        $response->assertRedirect(route('index', absolute: false) . '?verified=1');
     }
 }
